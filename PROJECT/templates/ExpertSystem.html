@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/expert-system.css') }}">
+    
+    <!-- <link rel="stylesheet" href="../css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="../css/expert-system.css"> -->
+    <title>Expert System</title>
+</head>
+<body class="position-relative d-flex flex-column justify-content-center align-items-center" >
+    <!-- <a href="{{url_for('index')}}" type="button" class="btn position-absolute m-5" style="background-color: rgb(32 73 92); color: white; top: 20px;">back to Home</a> -->
+    <h1 class="mt-3">Expert System</h1>
+    <div class="alert alert-primary mx-5" role="alert">
+        suggest for you best PC Software & programs is a specialized software application
+    </div>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+    {% if list %}
+        <h1>Hello, {{list.username}}</h1>
+    {% endif %}
+
+    <div class="d-flex flex-column flex-lg-row">
+        <div class="p-5 m-5 first-section">
+            <form method="POST" action="/expert-system">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="...">
+                </div>
+                <div class="mb-3">
+                    <label for="operatingSystem" class="form-label">Select the operating system : </label>
+                    <select name="operatingSystem" id="operatingSystem" class="form-select mb-5" aria-label="Default select example" >
+                        {% for sys in System %}
+                            <option value={{sys}}>{{sys}}</option>
+                        {% endfor %}
+                        <!-- <option value="Linux">Linux</option> -->
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="softwareType" class="form-label">Select type of the software : </label>
+                    <select name="softwareType" id="softwareType" class="form-select mb-5" aria-label="Default select example">
+                        {% for Cat in Category %}
+                            <option value={{Cat}}>{{Cat}}</option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="softwarePrice" class="form-label">Select price of the software : </label>
+                    <select name="softwarePrice" id="softwarePrice" class="form-select mb-5" aria-label="Default select example">
+                        {% for Pr in Price %}
+                            <option value={{Pr}}>{{Pr}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <input class='btn btn-primary' type="submit" value="Register">
+            </form>
+        </div>
+
+        <div class="p-5 m-5 second-section">
+            <div class="alert alert-primary" role="alert">
+                <h5>Product properties</h5>
+            </div>
+            {% if list %}
+                <div class="alert alert-success" role="alert">
+                    <h6>Operating System: {{list.operatingSystem}}</h6>
+                    <h6>Software Type: {{list.softwareType}}</h6>
+                    <h6>Software Price: {{list.softwarePrice}}</h6>
+                </div>
+                <div class="alert alert-primary" role="alert">
+                    <h5>I recommend for you :</h5>
+                    {% if results %}
+                        {% for result in results %}
+                            <h6>{{result}}</h6> 
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- <script src="../js/bootstrap.bundle.min.js"></script> -->
+</body>
+</html>
