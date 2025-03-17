@@ -48,4 +48,4 @@ Contributions are welcome! If you have any ideas or suggestions, feel free to op
 
 ## Contact Information
 
-For any questions or feedback, please contact [kamel touati](mailto:r_benlala@estin.dz).
+For any questions or feedback, please contact [Benlala Raid Athmane](mailto:r_benlala@estin.dz).
